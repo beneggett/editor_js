@@ -34,7 +34,6 @@ module EditorJs
 
       def safe_tags
         {
-          'font' => nil,
           'b' => nil,
           'i' => nil,
           'u' => ['class'],
