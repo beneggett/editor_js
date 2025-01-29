@@ -54,7 +54,7 @@ module EditorJs
       end
 
       def plain
-        decode_html(Sanitize.fragment data['text']).strip
+        decode_html(Sanitize.fragment(data['text'])).strip
       end
     end
   end

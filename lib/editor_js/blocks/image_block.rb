@@ -37,9 +37,9 @@ module EditorJs
           html_class += " #{css_name}__picture--with-background" if withBackground
           html_class += " #{css_name}__picture--with-border" if withBorder
 
-          html_str =  content_tag :div, class: html_class do
-                        content_tag :img, '', src: url
-                      end
+          html_str = content_tag :div, class: html_class do
+            content_tag :img, '', src: url
+          end
           html_str << content_tag(:div, caption.html_safe, class: "#{css_name}__caption").html_safe
         end
       end
@@ -47,9 +47,7 @@ module EditorJs
       def sanitize!
         %w[caption url].each do |key|
           str = Sanitize.fragment(data[key], remove_contents: true).strip
-          if key == 'url'
-            str.gsub!('&amp;', '&')
-          end
+          str.gsub!('&amp;', '&') if key == 'url'
           data[key] = str
         end
       end

@@ -5,7 +5,7 @@ RSpec.describe EditorJs::Blocks::ParagraphBlock do
     {
       type: 'paragraph',
       data: {
-        'text': "this is a paragraph &lt;div class='mr-1'&gt;hello&lt;/div&gt; <b>world</b>"
+        text: "this is a paragraph &lt;div class='mr-1'&gt;hello&lt;/div&gt; <b>world</b>"
       }
     }
   end
@@ -14,8 +14,8 @@ RSpec.describe EditorJs::Blocks::ParagraphBlock do
     {
       type: 'paragraph',
       data: {
-        'text': "这是一段居中的文字",
-        'alignment': 'align-center'
+        text: '这是一段居中的文字',
+        alignment: 'align-center'
       }
     }
   end
@@ -24,7 +24,9 @@ RSpec.describe EditorJs::Blocks::ParagraphBlock do
     let(:paragraph) { described_class.new(valid_data1) }
 
     it { expect(paragraph).to be_valid }
-    it { expect(paragraph.render).to eq(%|<div class="editor_js--paragraph">this is a paragraph &lt;div class='mr-1'&gt;hello&lt;/div&gt; <b>world</b></div>|) }
+    it {
+      expect(paragraph.render).to eq(%(<div class="editor_js--paragraph">this is a paragraph &lt;div class='mr-1'&gt;hello&lt;/div&gt; <b>world</b></div>))
+    }
     it { expect(paragraph.plain).to eq("this is a paragraph <div class='mr-1'>hello</div> world") }
   end
 
@@ -32,7 +34,9 @@ RSpec.describe EditorJs::Blocks::ParagraphBlock do
     let(:paragraph) { described_class.new(valid_data2) }
 
     it { expect(paragraph).to be_valid }
-    it { expect(paragraph.render).to eq(%|<div class="editor_js--paragraph editor_js--paragraph__align-center">这是一段居中的文字</div>|) }
-    it { expect(paragraph.plain).to eq("这是一段居中的文字") }
+    it {
+      expect(paragraph.render).to eq(%(<div class="editor_js--paragraph editor_js--paragraph__align-center">这是一段居中的文字</div>))
+    }
+    it { expect(paragraph.plain).to eq('这是一段居中的文字') }
   end
 end

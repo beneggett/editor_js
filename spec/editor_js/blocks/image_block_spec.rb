@@ -19,8 +19,9 @@ RSpec.describe EditorJs::Blocks::ImageBlock do
 
     it { expect(image).to be_valid }
 
-    it { expect(image.render).to eq(%|<div class="editor_js--image"><div class="editor_js--image__picture"><img src="http://xxx/image.png"></img></div><div class="editor_js--image__caption">this is a  &lt;hello&gt; world</div></div>|) }
+    it {
+      expect(image.render).to eq(%(<div class="editor_js--image"><div class="editor_js--image__picture"><img src="http://xxx/image.png"></img></div><div class="editor_js--image__caption">this is a  &lt;hello&gt; world</div></div>))
+    }
     it { expect(image.plain).to eq('this is a  <hello> world') }
   end
-
 end

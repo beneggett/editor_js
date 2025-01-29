@@ -61,9 +61,7 @@ module EditorJs
 
       def render_item(item, level = 1)
         if nested?
-          if item['items'].blank?
-            return content_tag(:li, item['content'].html_safe)
-          end
+          return content_tag(:li, item['content'].html_safe) if item['items'].blank?
 
           list = content_tag(list_tag, class: css_name, type: list_style(level)) do
             item['items'].map { |i| render_item(i, level + 1) }.join.html_safe
