@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'common_marker/custom_html_render'
 
 # frozen_string_literal: true
@@ -22,7 +24,8 @@ module CommonMarker
 
     def process_ast(ast, cmr_options)
       ast.walk do |node|
-        if node.type == :code_block
+        case node.type
+        when :code_block
           next if node.fence_info == ''
 
           source = node.string_content
@@ -42,14 +45,14 @@ module CommonMarker
 
           formatter ||= formatter_class.new(cmr_options[:options] || {})
 
-          html = '<div class="highlighter-rouge language-' + CGI.escapeHTML(node.fence_info) + '">' + formatter.format(lexer.lex(source)) + '</div>'
+          html = "<div class=\"highlighter-rouge language-#{CGI.escapeHTML(node.fence_info)}\">#{formatter.format(lexer.lex(source))}</div>"
 
           new_node = ::CommonMarker::Node.new(:html)
           new_node.string_content = html
 
           node.insert_before(new_node)
           node.delete
-        elsif node.type == :html
+        when :html
           node.string_content = ::Sanitize.fragment(
             node.string_content,
             ::Sanitize::Config.merge(

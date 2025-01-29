@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe EditorJs::Blocks::Base do
   subject(:base) { described_class.new(type: 'base') }
 
@@ -16,5 +18,4 @@ RSpec.describe EditorJs::Blocks::Base do
     it { expect(base.css_name).to eq 'mycss--base' }
     it { expect(base.css_name('__image')).to eq 'mycss--base__image' }
   end
-
 end

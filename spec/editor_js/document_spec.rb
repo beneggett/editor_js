@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 RSpec.describe EditorJs::Document do
-  let(:document_1_json) { IO.read(File.expand_path('../data/document_1.json', __dir__)) }
-  let(:document_1_html) { IO.read(File.expand_path('../data/document_1.html', __dir__)).strip }
-  let(:document_1_txt) { IO.read(File.expand_path('../data/document_1.txt', __dir__)).strip }
-  let(:document_1_output) { JSON.parse(IO.read(File.expand_path('../data/document_1.output', __dir__))) }
-  let(:document_2_json) { IO.read(File.expand_path('../data/document_2.json', __dir__)) }
-  let(:document_3_json) { IO.read(File.expand_path('../data/document_3.json', __dir__)) }
-  let(:document_with_invalid_block_json) { IO.read(File.expand_path('../data/document_with_invalid_block.json', __dir__)) }
-  let(:document_with_invalid_block_html) { IO.read(File.expand_path('../data/document_with_invalid_block.html', __dir__)).strip }
-  let(:document_with_invalid_block_render_html) { IO.read(File.expand_path('../data/document_with_invalid_block_render.html', __dir__)).strip }
+  let(:document_1_json) { File.read(File.expand_path('../data/document_1.json', __dir__)) }
+  let(:document_1_html) { File.read(File.expand_path('../data/document_1.html', __dir__)).strip }
+  let(:document_1_txt) { File.read(File.expand_path('../data/document_1.txt', __dir__)).strip }
+  let(:document_1_output) { JSON.parse(File.read(File.expand_path('../data/document_1.output', __dir__))) }
+  let(:document_2_json) { File.read(File.expand_path('../data/document_2.json', __dir__)) }
+  let(:document_3_json) { File.read(File.expand_path('../data/document_3.json', __dir__)) }
+  let(:document_with_invalid_block_json) do
+    File.read(File.expand_path('../data/document_with_invalid_block.json', __dir__))
+  end
+  let(:document_with_invalid_block_html) do
+    File.read(File.expand_path('../data/document_with_invalid_block.html', __dir__)).strip
+  end
+  let(:document_with_invalid_block_render_html) do
+    File.read(File.expand_path('../data/document_with_invalid_block_render.html', __dir__)).strip
+  end
 
   let(:document_1) { described_class.new(document_1_json) }
   let(:document_2) { described_class.new(document_2_json) }
@@ -42,7 +50,10 @@ RSpec.describe EditorJs::Document do
         end
 
         def plain; end
-        def output; {} end
+
+        def output
+          {}
+        end
       end
       doc = described_class.new(document_with_invalid_block_json, invalid_block_renderer: render)
       expect(doc.render).to eq document_with_invalid_block_render_html

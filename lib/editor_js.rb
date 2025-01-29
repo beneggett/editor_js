@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'active_support/core_ext/hash/keys'
 require 'active_support/core_ext/string/inflections'
 require 'active_support/core_ext/string/output_safety'
 require 'active_support/core_ext/object/deep_dup'
+require 'logger'
+require 'uri'
 require 'action_view'
 require 'action_view/helpers'
 require 'json-schema'
@@ -24,7 +28,7 @@ require 'editor_js/blocks/markdown_block'
 require 'editor_js/blocks/paragraph_block'
 require 'editor_js/blocks/qiniu_image_block'
 require 'editor_js/blocks/quote_block'
-require 'editor_js/blocks/warning_block.rb'
+require 'editor_js/blocks/warning_block'
 require 'editor_js/blocks/table_block'
 require 'editor_js/blocks/attaches_block'
 require 'editor_js/document'
@@ -36,8 +40,6 @@ module EditorJs
       @css_name_prefix ||= 'editor_js--'
     end
 
-    def css_name_prefix=(prefix)
-      @css_name_prefix = prefix
-    end
+    attr_writer :css_name_prefix
   end
 end

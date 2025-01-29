@@ -16,8 +16,11 @@ RSpec.describe EditorJs::Blocks::WarningBlock do
 
     it { expect(quote).to be_valid }
 
-    it { expect(quote.render).to eq(%|<div class="editor_js--warning"><div class="editor_js--warning__title">Note:</div><div class="editor_js--warning__message"><b>Avoid using this method just for lulz</b>. It can be very dangerous opposite your daily fun stuff.</div></div>|) }
-    it { expect(quote.plain).to eq('Note:, Avoid using this method just for lulz. It can be very dangerous opposite your daily fun stuff.') }
+    it {
+      expect(quote.render).to eq(%(<div class="editor_js--warning"><div class="editor_js--warning__title">Note:</div><div class="editor_js--warning__message"><b>Avoid using this method just for lulz</b>. It can be very dangerous opposite your daily fun stuff.</div></div>))
+    }
+    it {
+      expect(quote.plain).to eq('Note:, Avoid using this method just for lulz. It can be very dangerous opposite your daily fun stuff.')
+    }
   end
-
 end

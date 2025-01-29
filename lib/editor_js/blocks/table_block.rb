@@ -23,9 +23,9 @@ module EditorJs
           content_tag(:table) do
             data['content'].map do |row|
               content_tag(:tr) do
-                row.map { |col| content_tag :td, col.html_safe }.join().html_safe
+                row.map { |col| content_tag :td, col.html_safe }.join.html_safe
               end
-            end.join().html_safe
+            end.join.html_safe
           end
         end
       end

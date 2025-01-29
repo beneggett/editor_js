@@ -18,8 +18,9 @@ RSpec.describe EditorJs::Blocks::QuoteBlock do
 
     it { expect(quote).to be_valid }
 
-    it { expect(quote.render).to eq(%|<div class="editor_js--quote"><div class="editor_js--quote__text">这是第一段话&nbsp; abcdefg                     <br>  这个是第二段话：999999  <br>  结尾语句 </div><div class="editor_js--quote__caption">LiBai</div></div>|) }
+    it {
+      expect(quote.render).to eq(%(<div class="editor_js--quote"><div class="editor_js--quote__text">这是第一段话&nbsp; abcdefg                     <br>  这个是第二段话：999999  <br>  结尾语句 </div><div class="editor_js--quote__caption">LiBai</div></div>))
+    }
     it { expect(quote.plain).to eq('这是第一段话  abcdefg                        这个是第二段话：999999     结尾语句, LiBai') }
   end
-
 end
